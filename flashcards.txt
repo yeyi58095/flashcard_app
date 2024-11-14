@@ -1,0 +1,220 @@
+[Classification of Computer Networks]
+LAN: Local Area Network: 用於小範圍區域網路，如辦公室或校園網。
+MAN: Metropolitan Area Network: 覆蓋較大的都市區域，如整個城市。
+WAN: Wide Area Network: 跨越大地理範圍的網路，如國家或大洲。
+SAN: Storage Area Network: 用於數據存儲的專用網路。
+PAN: Personal Area Network: 覆蓋個人使用設備的網路，如藍牙。
+BAN: Body Area Network: 覆蓋個人體域的網路，用於可穿戴設備。
+
+[Introduction]
+ATM: Asynchronous Transfer Mode: 支持高速數據傳輸的技術。
+FDDI: Fiber Distributed Data Interface: 基於光纖的高速網路技術。
+ISO: International Organization for Standardization: 國際標準組織。
+OSI: Open Systems Interconnection: 開放系統互聯模型。
+MAC: Medium Access Control: 控制網路傳輸權限的協定。
+LLC: Logical Link Control: 提供邏輯鏈路控制的協定。
+IEEE: Institute of Electrical and Electronics Engineers: 電氣和電子工程師協會。
+RFC: Request for Comment: 技術與方法的正式文檔。
+IRTF: Internet Research Task Force: 網際網路研究工作小組。
+IETF: Internet Engineering Task Force: 網際網路工程工作小組。
+
+[Chapter 1]
+TCP: Transmission Control Protocol: 可靠、按序字節流傳輸協定，包含流量控制和擁塞控制。
+UDP: User Datagram Protocol: 無連接的非可靠數據傳輸，無流量控制和擁塞控制。
+ADSL: Asymmetric Digital Subscriber Line: 非對稱數字用戶線路，提供高速網際網路連接。
+HFC: Hybrid Fiber Coax: 混合光纖同軸線路，用於網路與有線電視接入。
+ISP: Internet Service Provider: 提供網際網路連接的服務供應商。
+ARP: Address Resolution Protocol: 用於將 IP 地址解析為物理 MAC 地址。
+NAT: Network Address Translation: 用於在本地網絡和公共網絡之間轉換 IP 地址。
+ICMP: Internet Control Message Protocol: 用於網絡設備之間傳遞錯誤消息和狀態信息。
+DHCP: Dynamic Host Configuration Protocol: 自動分配 IP 地址給網絡中的設備。
+
+[Chapter 2 (Application Layer)]
+P2P: Peer-to-peer: 對等網路架構，允許直接連接。
+HTTP: Hypertext Transfer Protocol: 基於80端口的網頁傳輸協定。
+FTP: File Transfer Protocol: 基於20和21端口的檔案傳輸協定。
+SMTP: Simple Mail Transfer Protocol: 基於25端口的郵件傳輸協定。
+POP: Post Office Protocol: 郵件接收協定，用於郵件下載。
+IMAP: Internet Mail Access Protocol: 網際郵件存取協定，支持遠端郵件存取。
+DNS: Domain Name System: 透過53端口（UDP）將域名轉換為IP地址。
+SNMP: Simple Network Management Protocol: 基於UDP的網路管理協定，使用端口161和162。
+TLD: Top-Level Domain Servers: 管理頂級域名伺服器。
+
+[Chapter 3 (Transport Layer)]
+RDT: Reliable Data Transfer: 可靠的數據傳輸機制。
+FSM: Finite State Machines: 有限狀態機，用於描述系統狀態變化。
+ACKs: Acknowledgements: 確認接收的機制。
+NAKs: Negative Acknowledgements: 否定確認，表示錯誤接收。
+RTT: Round-Trip Delay Time: 數據包來回的延遲時間。
+GBN: Go-Back-N: 一種窗口協議，允許多個分組在錯誤時重發。
+RM Cells: Resource Management Cells: 資源管理單元，用於流量管理。
+AIMD: Additive Increase Multiplicative Decrease: 一種擁塞控制機制。
+QoS: Quality of Service: 網絡服務質量技術，用於控制不同數據流的優先級。
+
+[OSI ISO layer (learn-only)]
+Application Layer: 應用層，支持網路應用程序。
+Presentation Layer: 表示層，負責數據格式轉換。
+Session Layer: 會話層，管理會話控制。
+Transport Layer: 傳輸層，確保數據傳輸的可靠性。
+Network Layer: 網路層，負責路由和數據包傳送。
+Data Link Layer: 資料鏈路層，提供數據鏈路控制。
+Physical Layer: 實體層，處理物理傳輸。
+
+
+[Key Concepts (learn-only)]
+Service Primitives: 服務原語是網路層之間的基本操作。常見的原語包括 CONNECT.request（請求建立連接）、CONNECT.response（響應連接請求）、DISCONNECT.request（請求斷開連接）、DATA.request（數據請求）等，用於管理通訊的各個階段。
+Connection-Oriented vs. Connectionless Services: 面向連接的服務（如 TCP）提供可靠的數據傳輸，建立連接、保持連接狀態並保證數據順序。而無連接服務（如 UDP）則不建立連接，也不保證數據的順序與傳輸成功，適合對延遲敏感的應用。
+Communication Modes: 通訊模式分為 Simplex（單工模式，僅單向傳輸）、Half-Duplex（半雙工模式，雙向傳輸但不可同時進行）和 Full-Duplex（全雙工模式，可同時雙向傳輸），分別適用於不同的網路場景。
+Flow Control 和 Error Control: 流量控制確保發送端不會過度發送數據而使接收端溢出。常見方法有窗口機制。錯誤控制則確保接收到的數據無誤，通常透過檢查和重傳來實現，例如 ACK 和 NAK。
+
+[Network Switching Types (learn-only)]
+Switching Types: 包括 Datagram Network（數據報網路，逐個數據包獨立傳輸）、Virtual-Circuit Network（虛擬電路網路，建立臨時路徑）和 Circuit-Switching（電路交換，建立固定路徑），各自具有不同的應用場景和性能特徵。
+Throughput 和 Bottleneck: 吞吐量指的是每秒傳輸的數據量，而瓶頸則是限制整體網速的最慢鏈接。這兩者是網路性能的重要衡量指標，影響整體的數據傳輸效率。
+Residential Access Technologies: 家用接入技術包括 ADSL（非對稱數字用戶線路，提供較高的下載速度）和 Cable Modem（基於有線電視網路，提供寬頻接入），它們各有優缺點，取決於網路結構和使用需求。
+
+[Network Applications (learn-only)]
+Network Applications: 常見的網路應用包括 Web（網頁瀏覽，基於 HTTP 協定）、E-mail（電子郵件，基於 SMTP、POP3 和 IMAP 協定）、DNS（域名系統，用於將域名轉換為 IP 地址）和 P2P（對等網路，允許用戶之間直接傳輸數據）。每種應用都有專屬的協定來支援功能。
+Socket Programming: 套接字編程是網路應用開發的基礎。它允許程式通過特定的 IP 和端口進行通訊，透過 create、bind、listen、accept 等指令來建立和管理連接。應用層協定如 HTTP 和 FTP 都依賴於套接字來進行數據傳輸。
+
+[Transport Layer Key Concepts (learn-only)]
+Reliable Data Transfer (RDT): 在傳輸層中，可靠的數據傳輸（RDT）保證了數據的完整性和順序。通過 ACK（確認）和 NAK（否認）機制來確保數據的正確接收，若出現錯誤則進行重傳。
+Congestion Control: 擁塞控制避免網路過載，通過調節數據流量以確保數據能順利傳輸。常見方法包括 TCP 的 AIMD 機制，即加性增長乘性減少（Additive Increase Multiplicative Decrease），逐步增加傳輸速率，直到出現擁塞再減少。
+TCP vs UDP: TCP 是一種可靠的面向連接的協定，適用於對數據傳輸可靠性要求高的應用，如電子郵件和文件傳輸。UDP 是無連接協定，適用於對延遲敏感的應用，如即時通信和視頻流，因其簡化了數據確認和重傳機制。
+
+[Transport Service Requirements of Common Apps (learn-only)]
+File Transfer:
+    - Data Loss: No loss
+    - Bandwidth: Elastic (適應網路變化)
+    - Time Sensitive: No (對時間要求不敏感)
+    - 詳細說明: 文件傳輸應用對數據的可靠性要求高，但對延遲不敏感。文件傳輸通常使用 TCP 協定來確保數據完整性。
+    - 圖表參考: 顯示了各類應用對數據丟失、帶寬、時間敏感度的不同需求。
+
+E-mail:
+    - Data Loss: No loss
+    - Bandwidth: Elastic
+    - Time Sensitive: No
+    - 詳細說明: 電子郵件傳輸應用需要完整的數據傳輸，但對延遲不敏感。通常使用 TCP 協定來保證可靠性。
+
+Web Documents:
+    - Data Loss: No loss
+    - Bandwidth: Elastic
+    - Time Sensitive: No
+    - 詳細說明: 網頁文件傳輸對於數據完整性要求高，以確保網頁能正確顯示。使用 HTTP（基於 TCP）來實現穩定傳輸。
+
+Real-Time Audio/Video:
+    - Data Loss: Loss-tolerant (容忍少量丟失)
+    - Bandwidth: Audio: 5kbps-1Mbps, Video: 10kbps-5Mbps
+    - Time Sensitive: Yes, 100’s of milliseconds
+    - 詳細說明: 實時音頻/視頻應用允許少量的數據丟失，以保持流暢播放。使用 UDP 以減少延遲，適合對時間敏感的應用。
+
+Stored Audio/Video:
+    - Data Loss: Loss-tolerant
+    - Bandwidth: Similar to Real-Time Audio/Video
+    - Time Sensitive: Yes, within a few seconds
+    - 詳細說明: 存儲的音頻/視頻允許一定數據丟失，播放時的延遲容忍度高於實時流媒體。
+
+Interactive Games:
+    - Data Loss: Loss-tolerant
+    - Bandwidth: Few kbps up
+    - Time Sensitive: Yes, 100’s of milliseconds
+    - 詳細說明: 互動遊戲對延遲敏感，少量丟失可接受，通常使用 UDP 來降低延遲。
+    - 圖表參考: 展示不同應用的數據丟失容忍度與時間敏感性。
+
+Instant Messaging:
+    - Data Loss: No loss
+    - Bandwidth: Elastic
+    - Time Sensitive: Varies (Yes and No)
+    - 詳細說明: 即時消息通常要求數據完整性，但允許輕微延遲。使用 TCP 或者基於延遲需求可選 UDP。
+[Internet Applications and Protocols (learn-only)]
+E-mail:
+    - Application Layer Protocol: SMTP [RFC 2821]
+    - Underlying Transport Protocol: TCP
+    - 詳細說明: 電子郵件系統使用 SMTP 協定來發送郵件，並依賴於 TCP 來保證傳輸的可靠性。
+
+Remote Terminal Access:
+    - Application Layer Protocol: Telnet [RFC 854]
+    - Underlying Transport Protocol: TCP
+    - 詳細說明: 遠程終端訪問使用 Telnet 協定，依賴 TCP 來確保命令和響應的順序。
+
+Web (HTTP):
+    - Application Layer Protocol: HTTP [RFC 2616]
+    - Underlying Transport Protocol: TCP
+    - 詳細說明: HTTP 用於網頁傳輸，通過 TCP 保證網頁完整加載。
+    - 圖表參考: 展示了應用層協定與其底層傳輸協定之間的對應關係。
+
+File Transfer:
+    - Application Layer Protocol: FTP [RFC 959]
+    - Underlying Transport Protocol: TCP
+    - 詳細說明: FTP 為文件傳輸協定，使用 TCP 來提供可靠數據傳輸。
+
+Streaming Multimedia:
+    - Application Layer Protocol: Proprietary (e.g., RealNetworks)
+    - Underlying Transport Protocol: TCP or UDP
+    - 詳細說明: 流媒體傳輸可以使用 TCP 來保證完整性，或 UDP 來減少延遲，取決於應用需求。
+
+Internet Telephony:
+    - Application Layer Protocol: Proprietary (e.g., Vonage, Dialpad)
+    - Underlying Transport Protocol: Typically UDP
+    - 詳細說明: 網路電話（如 VoIP）通常使用 UDP 以降低延遲。
+
+[TCP Segment Structure (learn-only)]
+"""
+       0             16              32 bits
+-----------------------------------------------
+|    Source Port #     |   Destination Port #  |
+-----------------------------------------------
+|                   Sequence Number            |
+-----------------------------------------------
+|               Acknowledgement Number         |
+-----------------------------------------------
+| Data |Rese-|U|A|P|R|S|F|                     |
+| Offset|rved |R|C|S|S|Y|I|       Window Size  |
+|       |     |G|K|H|T|N|N|                    |
+-----------------------------------------------
+|     Checksum           |    Urgent Pointer   |
+-----------------------------------------------
+|                    Options (if any)          |
+-----------------------------------------------
+|                    Application Data          |
+-----------------------------------------------
+
+TCP Header Length: 20 bytes (without options), 可變長度（含選項字段）
+
+- **Source Port #**: 起始端口號，指定數據包的來源端口。
+- **Destination Port #**: 目的端口號，指定數據包的目的端口。
+- **Sequence Number**: 序列號，用於數據包順序控制。
+- **Acknowledgement Number**: 確認號，用於確認接收到的數據序號。
+- **Data Offset**: 標示數據開始的偏移量，以 32-bit 為單位。
+- **Flags**: 一組控制標誌位，用於管理連接和數據傳輸流程：
+  - **URG** (Urgent): 緊急指針有效，用於標記緊急數據。
+  - **ACK** (Acknowledgement): 確認號有效，用於確認收到的數據。
+  - **PSH** (Push Function): 提示接收端立即處理這個段的數據。
+  - **RST** (Reset): 重新設置連接，通常用於錯誤處理。
+  - **SYN** (Synchronize): 同步序列號，用於連接建立的初始協商。
+  - **FIN** (Finish): 表示發送方完成數據傳輸，用於連接終止。
+- **Window Size**: 接收窗口大小，用於流量控制，表示接收端可以處理的數據量。
+- **Checksum**: 校驗和，用於檢查段的完整性。
+- **Urgent Pointer**: 當 URG 標誌位有效時，指示緊急數據的結束位置。
+- **Options**: 可選字段，用於支持額外的控制功能，例如時間戳。
+- **Application Data**: 真正的應用層數據，有可變長度。
+"""
+
+[UDP Segment Structure (learn-only)]
+"""
+       0             16              32 bits
+-----------------------------------------------
+|    Source Port #     |   Destination Port #  |
+-----------------------------------------------
+|          Length       |        Checksum      |
+-----------------------------------------------
+|                  Application Data            |
+-----------------------------------------------
+
+UDP Header Length: 8 bytes
+
+- **Source Port #**: 起始端口號，指定數據包的來源端口。
+- **Destination Port #**: 目的端口號，指定數據包的目的端口。
+- **Length**: 整個 UDP 段的長度，包括數據部分，以字節為單位。
+- **Checksum**: 校驗和，用於檢查數據的完整性。
+- **Application Data**: 真正的應用層數據，有可變長度。
+"""
