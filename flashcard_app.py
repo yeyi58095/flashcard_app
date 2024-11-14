@@ -38,35 +38,66 @@ def load_flashcards(filename="flashcards.txt"):
         st.error(f"文件 '{filename}' 未找到。請確認文件存在並重新運行。")
     return flashcards, learn_only_units
 
+# 初始化測驗狀態
+def initialize_quiz(flashcards, learn_only_units):
+    if "quiz_data" not in st.session_state:
+        all_flashcards = [(unit, abbreviation, info) for unit, unit_flashcards in flashcards.items()
+                          if unit not in learn_only_units
+                          for abbreviation, info in unit_flashcards.items()]
+        random.shuffle(all_flashcards)
+        st.session_state.quiz_data = {
+            "all_flashcards": all_flashcards,
+            "current_question": 0,
+            "correct_answers": 0,
+            "incorrect_answers": []
+        }
+
+# 回调函数，用于清空输入框并处理答案
+def submit_answer():
+    quiz_data = st.session_state.quiz_data
+    current_question = quiz_data["current_question"]
+    unit, abbreviation, info = quiz_data["all_flashcards"][current_question]
+    user_answer = st.session_state[f"answer_{current_question}"]
+
+    if user_answer.strip().lower() == info["full_name"].lower():
+        st.session_state.result = colored_text("正確！", "green")
+        quiz_data["correct_answers"] += 1
+    else:
+        st.session_state.result = colored_text(f"錯誤！正確答案是：{info['full_name']}", "red")
+        quiz_data["incorrect_answers"].append((abbreviation, info["full_name"]))
+
+    quiz_data["current_question"] += 1  # 增加当前问题的索引
+    st.session_state[f"answer_{current_question}"] = ""  # 清空当前输入框内容
+
 # 無範圍測驗模式
-def unlimited_quiz_mode(flashcards, learn_only_units):
-    all_flashcards = [(unit, abbreviation, info) for unit, unit_flashcards in flashcards.items()
-                      if unit not in learn_only_units
-                      for abbreviation, info in unit_flashcards.items()]
-    random.shuffle(all_flashcards)
-    total_questions = len(all_flashcards)
-    correct_answers = 0
-    incorrect_answers = []
+def unlimited_quiz_mode():
+    quiz_data = st.session_state.quiz_data
+    total_questions = len(quiz_data["all_flashcards"])
 
-    for unit, abbreviation, info in all_flashcards:
-        user_answer = st.text_input(f"請輸入 '{abbreviation}' 的全名 (單元: {unit}):", key=f"{unit}-{abbreviation}")
-        if user_answer:
-            if user_answer.strip().lower() == info["full_name"].lower():
-                st.markdown(colored_text("正確！", "green"), unsafe_allow_html=True)
-                correct_answers += 1
-            else:
-                st.markdown(colored_text(f"錯誤！正確答案是：{info['full_name']}", "red"), unsafe_allow_html=True)
-                incorrect_answers.append((abbreviation, info["full_name"]))
-            st.write(f"用途: {info['description']}\n")
+    if quiz_data["current_question"] < total_questions:
+        unit, abbreviation, info = quiz_data["all_flashcards"][quiz_data["current_question"]]
+        
+        st.text_input(
+            f"請輸入 '{abbreviation}' 的全名 (單元: {unit}):",
+            key=f"answer_{quiz_data['current_question']}",
+            on_change=submit_answer
+        )
 
-    # 顯示答錯的題目和答對率
-    if st.button("完成測驗"):
+        if "result" in st.session_state:
+            st.markdown(st.session_state.result, unsafe_allow_html=True)
+
+    else:
+        # 顯示答錯的題目和答對率
         st.write("測驗結束！")
-        if incorrect_answers:
+        if quiz_data["incorrect_answers"]:
             st.write("你答錯的題目：")
-            for abbreviation, full_name in incorrect_answers:
+            for abbreviation, full_name in quiz_data["incorrect_answers"]:
                 st.write(f"{abbreviation}: {full_name}")
-        st.write(f"答對率: {correct_answers / total_questions * 100:.2f}%")
+        st.write(f"答對率: {quiz_data['correct_answers'] / total_questions * 100:.2f}%")
+        # 清空 session_state，允許重新開始
+        if st.button("重新測驗"):
+            del st.session_state.quiz_data
+            del st.session_state.result
 
 # 主程式
 def main():
@@ -77,8 +108,11 @@ def main():
         return
 
     st.write("選擇無範圍測驗模式，系統將隨機顯示題目，請輸入答案。")
+    
     if st.button("開始測驗"):
-        unlimited_quiz_mode(flashcards, learn_only_units)
+        initialize_quiz(flashcards, learn_only_units)
+    if "quiz_data" in st.session_state:
+        unlimited_quiz_mode()
 
 if __name__ == "__main__":
     main()
