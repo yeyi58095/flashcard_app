@@ -30,6 +30,10 @@ class FlashcardsTest(unittest.TestCase):
         self.assertEqual(len({(unit, term) for unit, term, meaning in deck}), 152)
         self.assertEqual(len({unit for unit, term, meaning in deck}), 10)
         for _ in range(152):
+            unit, term, meaning = self.app.session_state.deck[self.app.session_state.card_index]
+            question = next(m.value for m in self.app.markdown if m.value.startswith("### "))
+            self.assertNotEqual(question, f"### 🔤 {term}")
+            self.assertGreater(len(question), 15)
             self.assertFalse(any(b.label == "✅ 我知道" for b in self.app.button))
             self.click("👀 顯示解釋")
             self.click("✅ 我知道")
@@ -65,6 +69,38 @@ class FlashcardsTest(unittest.TestCase):
         self.app.radio[0].set_value("歷史錯題複習").run()
         self.assertFalse(self.app.exception)
         self.assertIn("目前沒有歷史錯題", self.app.info[0].value)
+
+    def test_r_has_body_rate_context_without_revealing_answer(self):
+        self.app.selectbox[0].select_index(6).run()
+        card = next(card for card in self.app.session_state.deck if card[1] == "R")
+        self.app.session_state.deck = [card]
+        self.app.run()
+        question = next(m.value for m in self.app.markdown if m.value.startswith("### "))
+        self.assertIn("機體座標系", question)
+        self.assertIn("角速度分量 r", question)
+        self.assertNotIn("Yaw Rate", question)
+        self.assertFalse(any("Yaw Rate" in m.value for m in self.app.markdown))
+        self.click("👀 顯示解釋")
+        self.assertTrue(any("Yaw Rate" in m.value for m in self.app.markdown))
+
+    def test_every_card_has_a_question_and_banks_match(self):
+        lines = (APP_DIR / "alias.txt").read_text(encoding="utf-8").splitlines()
+        pending = False
+        questions = 0
+        for line in lines:
+            if line.startswith("? "):
+                self.assertFalse(pending)
+                pending = True
+                questions += 1
+            elif line and not line.startswith(("#", "[")):
+                self.assertTrue(pending, line)
+                pending = False
+        self.assertFalse(pending)
+        self.assertEqual(questions, 152)
+        # The standalone repo can run without the course workspace's copy.
+        workspace_copy = APP_DIR.parent / "alias.txt"
+        if workspace_copy.exists():
+            self.assertEqual(workspace_copy.read_bytes(), (APP_DIR / "alias.txt").read_bytes())
 
     def test_failed_save_keeps_session_review(self):
         self.wrongs.mkdir()

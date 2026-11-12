@@ -1,4 +1,5 @@
 import random
+import hashlib
 from datetime import datetime
 from pathlib import Path
 
@@ -19,7 +20,7 @@ def load_flashcards(path=FLASHCARDS_PATH):
         with open(path, "r", encoding="utf-8") as file:
             for raw_line in file:
                 line = raw_line.strip()
-                if not line or line.startswith("#"):
+                if not line or line.startswith(("#", "? ")):
                     continue
                 if line.startswith("[") and line.endswith("]"):
                     current_unit = line[1:-1].strip()
@@ -34,6 +35,28 @@ def load_flashcards(path=FLASHCARDS_PATH):
         return {}
 
     return {unit: cards for unit, cards in flashcards.items() if cards}
+
+
+def load_question_prompts(path=FLASHCARDS_PATH):
+    """An optional '? ' line supplies the next card's contextual question."""
+    prompts = {}
+    unit = None
+    pending = None
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("[") and line.endswith("]"):
+            unit = line[1:-1].strip()
+            pending = None
+        elif line.startswith("? "):
+            pending = line[2:].strip()
+        elif unit and ": " in line:
+            term = line.split(": ", 1)[0].strip()
+            if pending:
+                prompts[(unit, term)] = pending
+            pending = None
+    return prompts
 
 
 def start_unit(unit, cards):
@@ -69,7 +92,7 @@ def mark_card(correct):
     st.session_state.show_answer = False
 
 
-def run_quiz(unit, cards):
+def run_quiz(unit, cards, prompts):
     if st.session_state.get("quiz_unit") != unit:
         start_unit(unit, cards)
 
@@ -111,13 +134,15 @@ def run_quiz(unit, cards):
     source_unit, term, meaning = deck[index]
     st.progress(index / total)
     st.caption(f"第 {index + 1} / {total} 張 · {source_unit}")
-    st.markdown(f"### 🔤 {term}")
+    st.caption(f"詞彙索引：{term}")
+    question = prompts.get((source_unit, term), f"在「{source_unit}」中，{term} 的全名或意義與主要用途是什麼？")
+    st.markdown(f"### {question}")
 
     if not st.session_state.show_answer:
         if st.button("👀 顯示解釋", type="primary", use_container_width=True):
             st.session_state.show_answer = True
             st.rerun()
-        st.caption("先想想這個詞代表什麼，再翻開卡片。")
+        st.caption("先依題目回想，再翻開答案。")
         return
 
     st.markdown(f"📖 **全名／解釋**：{meaning}")
@@ -160,6 +185,16 @@ def main():
         st.error("題庫是空的，或題庫格式無法讀取。請檢查 alias.txt。")
         return
 
+    try:
+        prompts = load_question_prompts()
+        revision = hashlib.sha256(FLASHCARDS_PATH.read_bytes()).hexdigest()
+    except (OSError, UnicodeError) as error:
+        st.error(f"無法讀取題目：{error}")
+        return
+    if st.session_state.get("bank_revision") != revision:
+        st.session_state.pop("quiz_unit", None)
+        st.session_state.bank_revision = revision
+
     st.caption(f"題庫：{len(flashcards)} 個單元，共 {sum(map(len, flashcards.values()))} 張卡")
     mode = st.radio("練習方式", ["分單元練習", "全部混合練習", "歷史錯題複習"], horizontal=True)
     if mode == "分單元練習":
@@ -183,7 +218,7 @@ def main():
     st.caption("切換練習方式或單元會開始新一輪；歷史錯題紀錄會保留。")
     if st.button("重新開始這組練習"):
         start_unit(quiz_key, cards)
-    run_quiz(quiz_key, cards)
+    run_quiz(quiz_key, cards, prompts)
 
 
 if __name__ == "__main__":

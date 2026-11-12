@@ -1,176 +1,328 @@
-# Digital Avionics 閃卡題庫
-# 每個中括號是一個可單獨練習的單元。
-# 縮寫卡格式：縮寫: 全名: 解釋
-# 一般詞彙卡格式：名詞: 解釋
+# Digital Avionics 情境式閃卡題庫
+# ? 開頭的行是下一張卡片的題目；答案仍為 詞彙: 全名／解釋。
+# 保留原始詞彙索引以相容歷史錯題。
+
 
 [01 航電與數位系統]
+? 航電（Avionics）涵蓋哪些機載電子功能？請舉例。
 Avionics: 航空電子系統的統稱，包含飛機上的通訊、導航、監視、顯示、控制與系統管理。
+? Digital Avionics 如何用數位設備整合機載資訊與功能？
 Digital Avionics: 數位航電: 以數位電腦、感測器與資料匯流排整合飛機的電子系統，可集中顯示資訊並支援自動化功能。
+? A/D 在感測訊號進入電腦時做什麼？請說出英文全名與轉換方向。
 A/D: Analog-to-Digital Conversion: 將連續類比訊號取樣並量化成數位數值，供電腦處理。
+? D/A 在數位命令送往類比設備時做什麼？請說出英文全名與轉換方向。
 D/A: Digital-to-Analog Conversion: 將數位命令轉換成類比訊號，供後續設備或致動器使用。
+? 在空氣資料系統中，ADC 的英文全名、輸入量測與主要輸出是什麼？
 ADC: Air Data Computer: 接收空速管、靜壓孔及溫度等量測，計算空速、高度與馬赫數等空氣資料。
+? CPU 的英文全名與工作是什麼？其時脈能直接視為控制更新率嗎？
 CPU: Central Processing Unit: 中央處理器，執行程式指令與數值運算；時脈不等同感測取樣率或控制更新率。
+? 航電設備之間的 Bus 有什麼用途？
 Bus: 資料匯流排: 多個航電設備交換數位資料的共同傳輸路徑或通訊介面。
+? 航電標準名稱中的 ARINC 原英文名稱是什麼？與設備規格有何關係？
 ARINC: Aeronautical Radio, Incorporated: 航空電子領域常見的標準制定機構名稱，相關規格包含 ARINC 429 等。
+? ARINC 429 是哪一類航電介面？其傳輸方向有何特徵？
 ARINC 429: Aeronautical Radio, Incorporated Specification 429: 常見的單向數位航電資料匯流排規格，定義資料字格式與傳輸方式。
+? ARINC 629 如何讓多個航電終端交換資料？
 ARINC 629: Aeronautical Radio, Incorporated Specification 629: 可讓多個航電終端共用傳輸媒介的資料匯流排規格。
+? IMA 的英文全名是什麼？如何在共用運算平台上承載不同功能？
 IMA: Integrated Modular Avionics: 整合模組化航電，在共用運算平台上承載多項航電功能，並以分割與隔離管理資源。
+? LRU 的英文全名是什麼？這種設計對現場維修有什麼好處？
 LRU: Line-Replaceable Unit: 航線可更換單元，設計成能在維修現場快速拆換的設備或模組。
+? VLSI 的英文全名是什麼？與晶片整合程度有何關係？
 VLSI: Very Large-Scale Integration: 超大型積體電路技術，將大量電子元件整合在單一晶片上。
+? EMI 的英文全名是什麼？會如何影響航電設備？
 EMI: Electromagnetic Interference: 電磁干擾，外部或其他設備的電磁能量可能影響電子系統運作。
+? BIT 的英文全名是什麼？能如何協助設備監視與維修？
 BIT: Built-In Test: 內建測試功能，可監視設備狀態、記錄故障並協助維修人員定位問題。
+? 航電系統的 Redundancy 是什麼？為什麼需要額外通道？
 Redundancy: 備援: 以額外通道或設備，在主要部分失效時維持必要功能的設計方式。
+? Common-Mode Failure 是什麼？為何可能讓多個備援通道同時失去作用？
 Common-Mode Failure: 共同原因故障: 單一原因同時影響多個備援通道，使冗餘設計失去效果。
 
 [02 CNS、ATM 與航空通訊]
+? 航電架構中的 CNS 代表哪三項功能？請說出英文全名與各自用途。
 CNS: Communication, Navigation, and Surveillance: 通訊、導航與監視，分別支援資訊交換、位置與路徑判定，以及航空器狀態監視。
+? ATM 的英文全名是什麼？如何使用 CNS 資訊協調航空交通？
 ATM: Air Traffic Management: 空中交通管理，整合通訊、導航與監視資訊來協調航空交通。
+? 以美國為例，NAS 的英文全名是什麼？包含哪些運作要素？
 NAS: National Airspace System: 國家空域系統；期中整理以美國為例，涵蓋機場、空管設施、空域結構與運作程序。
+? ICAO 的英文全名是什麼？在國際民航中扮演什麼角色？
 ICAO: International Civil Aviation Organization: 國際民用航空組織，制定國際民航共同標準與建議作法。
+? ATC 的英文全名是什麼？主要提供哪些服務？
 ATC: Air Traffic Control: 空中交通管制，提供指示與協調以維持航空器間的安全間隔及交通秩序。
+? 航空通訊中的 HF 英文全名是什麼？常用於何種距離的通訊？
 HF: High Frequency: 高頻無線電，常用於遠距離航空語音通訊。
+? 航空通訊中的 VHF 英文全名是什麼？傳播距離主要受什麼條件限制？
 VHF: Very High Frequency: 特高頻無線電，常用於航空器與地面單位間的近距離視距通訊。
+? 航空通訊中的 UHF 英文全名是什麼？常見於何種航空環境？
 UHF: Ultra High Frequency: 超高頻無線電，可用於航空通訊，常見於軍用航空環境。
+? SATCOM 的英文全名是什麼？如何支援遠距離連線？
 SATCOM: Satellite Communications: 衛星通訊，透過衛星提供遠距離語音或資料連線。
+? 航空通訊標記 A/G 的英文全名是什麼？兩端分別是誰？
 A/G: Air-to-Ground: 空對地通訊，航空器與地面站之間的通訊。
+? 航空通訊標記 A/A 的英文全名是什麼？兩端分別是誰？
 A/A: Air-to-Air: 空對空通訊，航空器彼此之間的通訊。
+? ADS-B 的英文全名是什麼？航空器廣播的資訊從哪裡取得？
 ADS-B: Automatic Dependent Surveillance-Broadcast: 自動相關監視－廣播，航空器自動廣播由機載導航來源提供的位置及其他狀態資料。
+? TCAS 的英文全名與主要用途是什麼？
 TCAS: Traffic Collision Avoidance System: 空中防撞系統，利用航空器間的應答資訊提供附近交通警示與避撞指示。
+? ELT 的英文全名是什麼？在什麼情況提供何種協助？
 ELT: Emergency Locator Transmitter: 緊急定位發射器，事故或緊急狀況時發出定位訊號以協助搜救。
+? PBN 的英文全名是什麼？導航要求以什麼為依據？
 PBN: Performance-Based Navigation: 性能導航，依導航性能需求規範航路與飛行程序，而非只限定使用某種地面導航台。
+? CNS 中的 Surveillance 要取得哪些航空器資訊？提供給誰使用？
 Surveillance: 監視: 取得並呈現航空器的位置、識別與動態資訊，供空管及其他使用者掌握空域狀況。
+? National Airspace 指什麼？包含哪些空域運作要素？
 National Airspace: 國家空域: 一國管理的空域及其運作架構，包含空域分類、航路、機場與管制服務。
 
 [03 導航方式與無線電導航]
+? 在飛行任務中，Guidance 要根據目標與目前狀態決定什麼？
 Guidance: 導引: 根據任務目標與目前狀態，決定航空器應追蹤的航路或運動方向。
+? Navigation 要估計哪些航空器狀態？
 Navigation: 導航: 估計航空器的位置、速度與姿態等狀態，回答航空器目前在哪裡及如何運動。
+? Radio Navigation 利用什麼外部訊號提供哪些導航資訊？
 Radio Navigation: 無線電導航: 使用地面導航台或衛星訊號取得航空器位置、方位或距離資訊。
+? 在基本導航分類中，Dead Reckoning 如何由起點推算位置？主要限制是什麼？
 Dead Reckoning: 推算導航: 從已知起點出發，依航向、速度與經過時間推算目前位置；量測誤差會隨時間累積。
+? 本題庫的 Fixed-Point Positioning 指利用外部來源取得地球參考位置；這與單靠推算有何不同？
 Fixed-Point Positioning: 固定點定位: 以衛星等外部定位來源取得相對於地球座標系的位置解。
+? GNSS 的英文全名是什麼？請舉出所包含的衛星星系。
 GNSS: Global Navigation Satellite System: 全球導航衛星系統的統稱，涵蓋 GPS、GLONASS、Galileo 與 BeiDou 等星系。
+? GPS 的英文全名是什麼？它與 GNSS 是什麼關係？
 GPS: Global Positioning System: 美國建置的全球定位系統，是 GNSS 的其中一個星系。
+? VOR 的英文全名是什麼？提供航空器相對導航台的哪種資訊？
 VOR: VHF Omnidirectional Range: 特高頻全向信標，提供航空器相對於地面導航台的方位資訊。
+? DME 的英文全名是什麼？量測原理與距離種類是什麼？
 DME: Distance Measuring Equipment: 測距設備，依訊號往返時間估算航空器與地面台之間的斜距。
+? ADF 的英文全名是什麼？它接收什麼訊號、指示什麼資訊？
 ADF: Automatic Direction Finder: 自動定向儀，接收地面無方向性信標等訊號並指示電台相對方位。
+? TACAN 的英文全名是什麼？主要使用對象與提供的導航量是什麼？
 TACAN: Tactical Air Navigation: 戰術航空導航系統，主要供軍用航空器使用，提供方位與距離資訊。
+? ILS 的英文全名是什麼？提供哪兩個方向的進場引導？
 ILS: Instrument Landing System: 儀器降落系統，提供進場所需的橫向航道與垂直下滑路徑引導。
+? VFR 的英文全名是什麼？飛行依據的條件與程序是什麼？
 VFR: Visual Flight Rules: 目視飛行規則，依規定的目視氣象條件與程序進行飛行。
+? IFR 的英文全名是什麼？飛行依據的設備與程序是什麼？
 IFR: Instrument Flight Rules: 儀器飛行規則，依儀表及管制程序進行飛行。
+? GNSS/INS Integration 中，兩種導航來源如何互補？
 GNSS/INS Integration: GNSS/INS 整合: 融合衛星定位與慣性導航，利用 GNSS 修正 INS 漂移並利用 INS 提供連續快速的狀態估計。
+? Navigation Aid 可以如何修正或驗證導航狀態？請舉例。
 Navigation Aid: 導航輔助: 可用來修正或驗證導航狀態的外部資訊來源，例如 GPS、VOR/DME、雷達或地形資料。
 
 [04 GNC、飛控與自動駕駛]
+? GNC 的英文全名是什麼？三個部分各自回答哪一類問題？
 GNC: Guidance, Navigation, and Control: 導引決定路徑，導航估計目前狀態，控制則依誤差驅動飛機跟隨指令。
+? Control 如何利用目標命令與實際回授產生操縱輸入？
 Control: 控制: 依目標命令與實際回授計算操縱輸入，使航空器達到所需的運動狀態。
+? FBW 的英文全名是什麼？飛行員輸入如何傳到操縱面？
 FBW: Fly-By-Wire: 電傳飛控，以電子訊號將飛行員輸入送入飛控電腦，再由控制律計算致動命令。
+? FCC 的英文全名是什麼？利用哪些資料計算操縱命令？
 FCC: Flight Control Computer: 飛行控制電腦，依飛行員指令、感測器資料及控制律計算操縱命令。
+? 飛控中的 Control Law 把哪些輸入轉成什麼輸出？
 Control Law: 控制律: 把飛行員輸入與飛機狀態轉換成操縱面命令的控制邏輯或數學規則。
+? Autopilot 可以自動維持或改變哪些飛行狀態？
 Autopilot: 自動駕駛: 自動維持或改變飛機的姿態、航向、高度或速度等飛行狀態的系統。
+? 閉迴路系統中的 Controller 如何決定控制命令？
 Controller: 控制器: 根據目標與回授間的誤差計算控制命令，決定系統的反應方式。
+? Actuator 如何把控制命令轉成實際動作？請舉例。
 Actuator: 致動器: 將控制命令轉成實際機械位移或力量的裝置，例如移動升降舵或副翼。
+? 操縱面驅動系統中的 PCU 英文全名與功能是什麼？
 PCU: Power Control Unit: 動力操縱單元，利用液壓等動力來源驅動操縱面。
+? 在飛控回授架構中，SAS 的英文全名是什麼？如何改善穩定性或阻尼？
 SAS: Stability Augmentation System: 穩定增強系統，利用感測器回授自動修正操縱，以改善飛機穩定性或阻尼。
+? 737 MAX 飛控中的 MCAS 英文全名與主要功能是什麼？
 MCAS: Maneuvering Characteristics Augmentation System: 操縱特性增強系統，737 MAX 上依特定條件啟動的縱向操縱輔助功能。
+? 在飛控回授中，Rate Gyro 量測什麼？
 Rate Gyro: 速率陀螺儀: 量測飛機繞軸角速度並提供回授，例如量測俯仰或滾轉速率。
+? 控制方塊圖的 Error Summing Junction 如何產生誤差訊號？
 Error Summing Junction: 誤差加總點: 將目標命令與量測回授相減，產生送往控制器的誤差訊號。
+? Closed-Loop Control 如何利用輸出回授修正輸入？
 Closed-Loop Control: 閉迴路控制: 將系統輸出回授並與目標比較，依誤差持續修正輸入的控制方式。
+? Pitch Rate 代表哪種旋轉、繞哪個機體軸？常用符號是什麼？
 Pitch Rate: 俯仰角速度: 飛機繞橫向軸轉動的角速度，常以 q 表示。
+? Roll Rate 代表哪種旋轉、繞哪個機體軸？常用符號是什麼？
 Roll Rate: 滾轉角速度: 飛機繞縱向軸轉動的角速度，常以 p 表示。
+? Heading 描述航空器的什麼方向？通常以什麼為參考？
 Heading: 航向: 飛機縱軸在水平面上的指向，通常相對北方量測。
+? Elevator 是哪個操縱面？主要控制哪種旋轉運動？
 Elevator: 升降舵: 主要控制飛機俯仰運動的操縱面。
+? Aileron 是哪個操縱面？主要控制哪種旋轉運動？
 Aileron: 副翼: 主要控制飛機滾轉運動的操縱面。
+? Rudder 是哪個操縱面？主要控制哪種旋轉運動？
 Rudder: 方向舵: 主要控制飛機偏航運動的操縱面。
 
 [05 氣動力與飛行參數]
+? Airfoil 描述機翼的哪種幾何形狀？主要用途是什麼？
 Airfoil: 翼型: 用來產生升力的翼剖面形狀。
+? AOA 的英文全名是什麼？它是由哪兩條方向線定義的角度？
 AOA: Angle of Attack: 攻角，翼弦線與相對氣流方向之間的夾角。
+? Wing Incidence 是哪兩條基準線的夾角？一般會隨飛行姿態改變嗎？
 Wing Incidence: 翼安裝角: 機翼弦線相對於機身基準線的固定安裝角度。
+? Lift 的方向相對來流如何定義？
 Lift: 升力: 由機翼周圍氣流造成、方向大致垂直於相對氣流的氣動力。
+? Drag 的方向相對航空器穿越空氣的運動如何定義？
 Drag: 阻力: 方向大致與相對氣流相反、阻礙飛機前進的氣動力。
+? Thrust 由什麼產生？在飛行中主要有何作用？
 Thrust: 推力: 引擎產生、主要用來克服阻力並使飛機加速的力。
+? Weight 由什麼作用產生？方向大致指向哪裡？
 Weight: 重量: 重力作用在飛機上的力，方向指向地心附近。
+? Center of Pressure 是什麼作用點？位置是否固定？
 Center of Pressure: 壓力中心: 機翼氣動合力的等效作用點，其位置會隨飛行條件改變。
-Aerodynamic Center: 氣動中心: 攻角改變時俯仰力矩近似不變的翼型參考點，常近似位於平均弦長四分之一處。
+? Aerodynamic Center 以哪個力矩特徵定義？低速薄翼型常近似在哪裡？
+Aerodynamic Center: 氣動中心: 在適用的攻角範圍內，繞此參考點的俯仰力矩隨攻角近似不變；低速薄翼型常近似在弦長四分之一處，位置依翼型與流況而異。
+? Free Stream 指哪一部分氣流？為什麼可作分析參考？
 Free Stream: 自由流: 未受飛機擾動的遠場來流，可作為氣動力分析的參考氣流。
+? Relative Wind 的方向與飛機相對空氣的速度有何關係？
 Relative Wind: 相對風: 飛機在空氣中運動時所感受到、方向與飛行速度向量相反的氣流。
+? Air Density 的定義是什麼？會影響哪些氣動性能？
 Air Density: 空氣密度: 單位體積空氣的質量，會影響升力、阻力及飛機性能。
+? Lift Coefficient 表示什麼？升力以哪些量作無因次化？
 Lift Coefficient: 升力係數: 表示升力相對於動壓與機翼面積大小的無因次係數。
+? CLmax 的英文名稱與物理意義是什麼？
 CLmax: Maximum Lift Coefficient: 最大升力係數，翼型或機翼在失速前可提供的最大升力係數。
-Angle of Incidence: 入射角: 氣流方向與翼型弦線之間的角度；常與攻角相關，需依教材定義辨別。
-Slip Angle: 側滑角: 飛機速度方向與機體縱向基準之間的側向角度。
+? 在固定翼幾何中，Angle of Incidence 與 AOA 的參考方向有何不同？
+Angle of Incidence: 翼安裝角: 在固定翼幾何中指翼弦線與機身縱向基準線的夾角，通常由結構安裝決定，與相對氣流及翼弦之間的攻角 AOA 不同；Wing Incidence 為同義用語。
+? 本題庫的 Slip Angle 指飛機側滑角 β；它描述速度向量相對機體哪個平面的偏離？
+Slip Angle: 側滑角（Sideslip Angle, β）: 速度向量偏離機體 x-z 對稱平面的角度，反映側向速度分量；本題庫沿用 Slip Angle 索引。
 
 [06 穩定性、操縱與飛行機動]
+? Static Stability 判斷小擾動後的哪一種初始反應？
 Static Stability: 靜穩定性: 飛機受到小擾動後，初始氣動力矩是否傾向使它回到原來平衡狀態的性質。
+? Dynamic Stability 判斷擾動後運動隨時間的哪幾種趨勢？
 Dynamic Stability: 動穩定性: 飛機受到擾動後，運動隨時間是否逐漸衰減、維持或發散的性質。
+? Neutral Point 是什麼位置？重心在其前方通常表示什麼縱向穩定性？
 Neutral Point: 中性點: 縱向靜穩定性轉為中性的位置；重心在其前方通常具有正縱向靜穩定性。
+? Static Margin 如何由中性點與重心位置定義？通常如何表示？
 Static Margin: 靜穩定裕度: 中性點與重心之間的距離，常以平均氣動弦長的百分比表示。
+? Center of Gravity 是什麼位置？與中性點的相對位置為何重要？
 Center of Gravity: 重心: 飛機質量可視為集中作用的位置；重心相對中性點的位置影響靜穩定性。
+? 飛機達到 Trim 時，主要力與力矩須滿足什麼條件？
 Trim: 配平: 使飛機在指定飛行條件下維持所需狀態，並使主要力與力矩達平衡的狀態。
+? Stall 的直接氣動條件是什麼？升力與阻力通常如何變化？
 Stall: 失速: 攻角超過臨界值後，升力顯著下降且阻力增加的氣動現象。
-Load Factor: 載荷因數: 飛機所受氣動力與重量的比值，常以 g 為單位表達。
+? 基本飛行力學中的 Load Factor 如何定義？平飛與轉彎時如何解讀？
+Load Factor: 載荷因數: 基本協調飛行分析常用 n = L/W，為升力與重量之比，是無因次量，常口語稱幾 g；定常水平直線飛行約為 1，協調水平轉彎通常大於 1。更一般的結構載荷定義須指定所取氣動力分量。
+? 本卡的 Accelerating Flight 指速率大小改變；沿運動方向的合力有何條件？
 Accelerating Flight: 加速飛行: 飛機速度大小隨時間改變的飛行狀態，需有沿運動方向的淨力。
+? Turning Flight 即使速率不變，為什麼仍需要合力？
 Turning Flight: 轉彎飛行: 飛機速度方向改變的飛行狀態，需要向心加速度及相應的合力。
+? Thrust-to-Throttle Mapping 描述哪兩者的對應？是否可隨飛行階段調整？
 Thrust-to-Throttle Mapping: 油門－推力對應: 引擎控制將油門桿位置轉換成推力命令的關係，可依飛行階段調整。
+? 從飛行操縱特性來看，SAS 的英文全名是什麼？如何藉小幅回授修正改善穩定性？
 SAS: Stability Augmentation System: 穩定增強系統，持續提供小幅回授修正以改善一般飛行穩定性。
+? 從縱向操縱特性來看，MCAS 的英文全名是什麼？在特定條件下扮演何種角色？
 MCAS: Maneuvering Characteristics Augmentation System: 操縱特性增強系統，於特定飛行條件介入以調整縱向操縱特性。
 
 [07 飛行動力學與座標]
+? Aircraft Dynamics 研究操縱與外力如何影響哪些運動狀態？
 Aircraft Dynamics: 飛機動力學: 描述飛機受到操縱與外力後，速度、姿態及位置如何隨時間變化。
+? 飛機的 Equation of Motion 連結哪些力學量與運動量？
 Equation of Motion: 運動方程: 描述力、力矩與飛機平移及轉動運動之間關係的數學方程。
+? Nonlinear Model 保留什麼關係？適用範圍與計算負擔如何？
 Nonlinear Model: 非線性模型: 保留原始非線性關係的系統模型，適合較大範圍模擬但計算較複雜。
+? Linear Model 通常在哪種飛行狀態附近建立？適合分析什麼？
 Linear Model: 線性模型: 在指定平衡飛行狀態附近將方程近似線性化，便於分析小擾動與控制設計。
+? Body Frame 如何固定在飛機上？軸向會如何隨機體運動？
 Body Frame: 機體座標系: 固定在飛機上的座標系，軸向隨機體一起移動與轉動。
+? Earth-Fixed Frame 固定於什麼？軸向是否跟著飛機轉動？
 Earth-Fixed Frame: 地球固定座標系: 相對地球表面固定的座標系，位置軸向不隨飛機運動改變。
+? Inertial Frame 需滿足哪些理想參考系條件？
 Inertial Frame: 慣性座標系: 近似不旋轉、不加速的參考座標系，用來描述絕對運動。
+? Stability Axes 以哪個平衡飛行方向建立？常用於哪種分析？
 Stability Axes: 穩定軸座標系: 以平衡飛行時的氣流方向為參考建立的座標系，常用於飛機小擾動分析。
-U: Forward Velocity: 沿機體縱軸向前的速度分量。
-V: Sideways Velocity: 沿機體側向軸的速度分量。
-W: Vertical Velocity: 沿機體垂直軸的速度分量。
-P: Roll Rate: 繞機體縱軸的角速度分量。
-Q: Pitch Rate: 繞機體橫向軸的角速度分量。
-R: Yaw Rate: 繞機體垂直軸的角速度分量。
+? 在機體座標系中，線速度分量 u（常寫作 U）沿哪個軸？常見 x 向前、y 向右、z 向下的約定中，正方向為何？
+U: Forward Velocity（u）: 機體 x 軸方向的線速度分量；採 x 向前、y 向右、z 向下的常見機體軸約定時，向前為正。
+? 在機體座標系中，線速度分量 v（常寫作 V，非總空速）沿哪個軸？常見 x 向前、y 向右、z 向下的約定中，正方向為何？
+V: Sideways Velocity（v）: 機體 y 軸方向的線速度分量；採 x 向前、y 向右、z 向下的常見機體軸約定時，向右為正，不是總空速大小。
+? 在機體座標系中，線速度分量 w（常寫作 W，非重量）沿哪個軸？常見 x 向前、y 向右、z 向下的約定中，正方向為何？
+W: Vertical Velocity（w）: 機體 z 軸方向的線速度分量；採 x 向前、y 向右、z 向下的常見機體軸約定時，向下為正，不一定等於地球垂直方向的下降率，也不是重量。
+? 在機體座標系中，角速度分量 p（常寫作 P）代表哪種旋轉？繞哪個軸？
+P: Roll Rate（p）: 機體角速度向量沿 x 軸的分量，即繞機體縱軸的滾轉角速度；正負依右手定則，不可一般性地直接當作 Euler 滾轉角的時間微分。
+? 在機體座標系中，角速度分量 q（常寫作 Q，非動壓）代表哪種旋轉？繞哪個軸？
+Q: Pitch Rate（q）: 機體角速度向量沿 y 軸的分量，即繞機體橫軸的俯仰角速度；正負依右手定則，不是動壓，也不一般等於 Euler 俯仰角的時間微分。
+? 在機體座標系中，角速度分量 r（常寫作 R，非旋轉矩陣）代表哪種旋轉？繞哪個軸？
+R: Yaw Rate（r）: 機體角速度向量沿 z 軸的分量，即繞機體垂直軸的偏航角速度；正負依右手定則，不是旋轉矩陣，也不一般等於航向角的時間微分。
+? Euler Angles 如何表示三維姿態？為何必須指定旋轉軸序？
 Euler Angles: Euler 角: 依指定軸序的三個角度表示三維姿態，常用俯仰、滾轉與偏航角。
+? Quaternion 如何表示三維旋轉？相較 Euler 角可避免什麼問題？
 Quaternion: 四元數: 用四個參數表示三維旋轉的姿態表示法，可避免 Euler 角的特定奇異姿態。
+? Direction Cosine Matrix 連結什麼座標關係？可用來做什麼轉換？
 Direction Cosine Matrix: 方向餘弦矩陣: 描述兩座標系方向關係的旋轉矩陣，可用來轉換向量分量。
+? Control Surface 如何改變飛機的力與力矩？請舉例。
 Control Surface: 操縱面: 飛機上可偏轉以改變氣動力與力矩的表面，例如升降舵、副翼及方向舵。
 
 [08 慣性導航系統與陀螺儀]
+? INS 的英文全名是什麼？由慣性量測推算哪些導航狀態？
 INS: Inertial Navigation System: 慣性導航系統，利用慣性感測量測推算航空器的姿態、速度與位置。
+? IMU 的英文全名與主要量測是什麼？一定會直接輸出位置嗎？
 IMU: Inertial Measurement Unit: 慣性量測單元，提供角速度與比力等慣性量測；本身不一定輸出導航位置。
+? 慣性感測器架構中的 ISA 英文全名是什麼？本卡不是指標準大氣；它提供哪類資料？
 ISA: Inertial Sensor Assembly: 慣性感測器組件，提供未經完整導航解算的原始陀螺儀與加速度計量測。
+? Strapdown INS 的感測器如何安裝？如何把量測轉到導航座標系？
 Strapdown INS: 捷聯式慣性導航系統: 將慣性感測器固定於機體，利用數學解算把量測轉至導航座標系。
+? Platform INS 的感測器如何保持參考方向？
 Platform INS: 平台式慣性導航系統: 將感測器安裝在機械穩定平台上，使量測軸保持於指定參考方向。
+? Gyroscope 可量測或提供什麼慣性資訊？
 Gyroscope: 陀螺儀: 量測角速度或提供慣性方向參考的感測器。
+? Accelerometer 實際量測什麼？在慣導中有何用途？
 Accelerometer: 加速度計: 量測沿感測軸比力的感測器，是慣性導航的重要元件。
+? RLG 的英文全名是什麼？用哪種光學差異量測旋轉？
 RLG: Ring Laser Gyroscope: 環形雷射陀螺儀，利用反向傳播雷射的頻率差量測角速度。
+? FOG 的英文全名是什麼？用哪種光學差異量測旋轉？
 FOG: Fiber-Optic Gyroscope: 光纖陀螺儀，利用光纖內反向傳播光束的相位差量測角速度。
+? HRG 的英文全名是什麼？利用哪種結構與物理現象量測旋轉？
 HRG: Hemispherical Resonator Gyroscope: 半球諧振陀螺儀，利用半球形諧振器的振動特性量測角速度。
+? MEMS 的英文全名是什麼？整合了哪兩類元件？
 MEMS: Micro-Electro-Mechanical Systems: 微機電系統，將微型機械結構與電子電路整合於微小元件中。
+? Sagnac Effect 發生在何種光路？反向傳播光束會有什麼差異？
 Sagnac Effect: 沙格納克效應: 旋轉的閉合光路中，順向與逆向光束會產生時間或相位差，是光學陀螺儀的原理之一。
+? Specific Force 與包含重力的運動加速度有何關係？
 Specific Force: 比力: 加速度計實際量測的非重力加速度量，須結合姿態與重力模型求運動加速度。
+? 在慣性感測器分類中，Rate Gyro 的直接輸出量是什麼？
 Rate Gyro: 速率陀螺儀: 輸出角速度量測值的陀螺儀，常用於飛控回授。
 
 [09 慣導誤差、推算與融合]
+? Gyro Bias 是什麼量測誤差？為何積分後會造成姿態漂移？
 Gyro Bias: 陀螺儀偏差: 陀螺儀即使沒有旋轉仍可能存在的零點輸出，積分後會造成姿態漂移。
+? Scale Factor Error 描述感測器輸入與輸出間的哪種誤差？
 Scale Factor Error: 比例因子誤差: 感測器輸出與真實輸入之間的比例偏差，會造成角速度或加速度量測誤差。
+? Gyro Noise 是什麼？會如何影響積分角度與慣導精度？
 Gyro Noise: 陀螺儀雜訊: 陀螺儀輸出的隨機變化，影響角度估計與慣導精度。
+? Accelerometer Bias 經過一次與兩次積分，分別造成什麼誤差？
 Accelerometer Bias: 加速度計偏差: 加速度計的零點誤差，經積分會逐漸累積成速度及位置誤差。
+? Misalignment 是哪些軸之間的誤差？如何影響量測分量？
 Misalignment: 安裝對準誤差: 感測器軸與機體或導航座標軸沒有完全對準所造成的量測分量誤差。
+? 慣性導航中的 Drift 指什麼現象？可能由哪些誤差造成？
 Drift: 漂移: 導航誤差隨時間逐漸增加的現象，常由感測器偏差、雜訊或模型誤差造成。
+? 從誤差累積的角度看，Dead Reckoning 如何推算位置？為何長時間後需要外部修正？
 Dead Reckoning: 推算導航: 依已知起點、航向與速度隨時間推算位置的方式，長時間會受到誤差累積影響。
+? INS 的 Initial Alignment 在開始導航前要估計哪些初始資訊？
 Initial Alignment: 初始對準: 飛行前估計慣性導航系統初始姿態與方向的程序。
+? 慣性感測器的 Calibration 要估計並補償哪些誤差？
 Calibration: 校正: 估計並補償感測器偏差、比例因子及對準誤差的程序。
+? Complementary Filter 如何利用不同感測器的頻率特性互補？請舉例。
 Complementary Filter: 互補濾波器: 融合低頻與高頻特性互補的感測量，例如以加速度計修正低頻姿態、以陀螺儀提供快速變化。
+? Kalman Filter 如何結合模型預測、量測與不確定度估計狀態？
 Kalman Filter: 卡爾曼濾波器: 根據系統模型與量測不確定度，融合預測及量測來估計狀態的演算法。
+? EKF 的英文全名是什麼？如何把卡爾曼濾波延伸到非線性系統？
 EKF: Extended Kalman Filter: 擴展卡爾曼濾波器，將卡爾曼濾波方法延伸至可線性化處理的非線性系統。
+? Aided INS 如何利用外部量測限制長期漂移？請舉例。
 Aided INS: 輔助慣性導航系統: 將 GPS、空速資料或高度量測等外部來源融合到 INS，以限制長期漂移。
+? Radio Altimeter 量測相對哪個表面的高度？使用什麼訊號？
 Radio Altimeter: 無線電高度計: 以無線電量測飛機與正下方地表間高度的設備。
+? Barometric Altitude 由哪些量測與模型推算？
 Barometric Altitude: 氣壓高度: 由氣壓感測及大氣模型推算的高度。
 
 [10 冗餘與可靠度]
+? TMR 的英文全名是什麼？有幾個通道、多數決通常可容忍幾個故障？
 TMR: Triple Modular Redundancy: 三重模組冗餘，使用三個平行通道並以多數決判斷輸出，通常可容忍一個通道故障。
+? QMR 的英文全名是什麼？有幾個通道、可採用哪些表決方法？
 QMR: Quadruple Modular Redundancy: 四重模組冗餘，使用四個平行通道，依設計採用中位數或其他表決邏輯。
+? Voting Logic 如何比較多個通道？要選擇或辨識什麼？
 Voting Logic: 表決邏輯: 比較多個冗餘通道的輸出，選出可信結果或判斷故障通道的機制。
+? Fault Tolerance 描述系統在什麼情況下仍維持何種能力？
 Fault Tolerance: 容錯能力: 系統在部分元件發生故障時仍維持指定功能的能力。
-Fail-Operational: 故障後可運作: 發生一項或多項故障後，系統仍可持續執行原有功能的設計目標。
+? Fail-Operational 要求故障後仍維持什麼能力？實際可容忍故障數由什麼決定？
+Fail-Operational: 故障後可運作: 在設計規定的故障情境下，系統仍可持續執行指定功能；可容忍的故障種類與數量由具體系統需求及架構決定。
+? Fail-Safe 要求故障後系統轉入什麼狀態？
 Fail-Safe: 故障安全: 發生故障時，系統轉入可接受的安全狀態以降低危險的設計原則。
