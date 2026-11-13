@@ -23,13 +23,13 @@ class FlashcardsTest(unittest.TestCase):
         next(button for button in self.app.button if button.label == label).click().run()
         self.assertFalse(self.app.exception)
 
-    def test_all_152_cards_can_be_completed(self):
+    def test_all_452_cards_can_be_completed(self):
         self.app.radio[0].set_value("全部混合練習").run()
         deck = self.app.session_state.deck
-        self.assertEqual(len(deck), 152)
-        self.assertEqual(len({(unit, term) for unit, term, meaning in deck}), 152)
-        self.assertEqual(len({unit for unit, term, meaning in deck}), 10)
-        for _ in range(152):
+        self.assertEqual(len(deck), 452)
+        self.assertEqual(len({(unit, term) for unit, term, meaning in deck}), 452)
+        self.assertEqual(len({unit for unit, term, meaning in deck}), 30)
+        for _ in range(452):
             unit, term, meaning = self.app.session_state.deck[self.app.session_state.card_index]
             question = next(m.value for m in self.app.markdown if m.value.startswith("### "))
             self.assertNotEqual(question, f"### 🔤 {term}")
@@ -41,7 +41,7 @@ class FlashcardsTest(unittest.TestCase):
         self.assertFalse(self.wrongs.exists())
         self.click("🔁 重練這個單元")
         self.assertEqual(self.app.session_state.card_index, 0)
-        self.assertEqual(len(self.app.session_state.deck), 152)
+        self.assertEqual(len(self.app.session_state.deck), 452)
 
     def test_wrong_review_and_unit_switch(self):
         self.app.selectbox[0].select_index(9).run()
@@ -96,7 +96,7 @@ class FlashcardsTest(unittest.TestCase):
                 self.assertTrue(pending, line)
                 pending = False
         self.assertFalse(pending)
-        self.assertEqual(questions, 152)
+        self.assertEqual(questions, 452)
         # The standalone repo can run without the course workspace's copy.
         workspace_copy = APP_DIR.parent / "alias.txt"
         if workspace_copy.exists():
@@ -109,6 +109,19 @@ class FlashcardsTest(unittest.TestCase):
         self.assertEqual(len(self.app.session_state.wrong_cards), 1)
         self.assertEqual(self.app.session_state.card_index, 1)
         self.assertTrue(self.app.warning)
+
+    def test_extended_mode_and_offline_downloads(self):
+        self.assertEqual(len(self.app.get("download_button")), 2)
+        self.app.radio[0].set_value("作業與申論混合").run()
+        self.assertFalse(self.app.exception)
+        self.assertEqual(len(self.app.session_state.deck), 300)
+        self.assertTrue(all(term.startswith("HW-") for unit, term, answer in self.app.session_state.deck))
+        card = next(c for c in self.app.session_state.deck if c[1] == "HW-ALT-01")
+        self.app.session_state.deck = [card]
+        self.app.run()
+        self.click("👀 顯示解釋")
+        self.assertTrue(any("架構：" in m.value for m in self.app.markdown))
+        self.assertTrue(any("回授：" in m.value for m in self.app.markdown))
 
 
 if __name__ == "__main__":

@@ -145,7 +145,9 @@ def run_quiz(unit, cards, prompts):
         st.caption("先依題目回想，再翻開答案。")
         return
 
-    st.markdown(f"📖 **全名／解釋**：{meaning}")
+    st.markdown("📖 **參考答案／自評要點**")
+    for part in meaning.split(" || "):
+        st.markdown(part)
     st.write("看完答案後，依照自己剛才是否答對來評估：")
     col1, col2 = st.columns(2)
     with col1:
@@ -177,8 +179,8 @@ def load_wrong_cards(flashcards):
 
 def main():
     st.set_page_config(page_title="航電閃卡", page_icon="🛩️", layout="centered")
-    st.title("🛩️ 航電名詞閃卡")
-    st.write("選一個主題，先回想詞義，再翻開答案並自我評估。")
+    st.title("🛩️ 航電複習閃卡")
+    st.write("名詞、作業申論、架構畫圖與計算題。先自行回想或畫圖，再翻開答案並自評。")
 
     flashcards = load_flashcards()
     if not flashcards:
@@ -196,7 +198,17 @@ def main():
         st.session_state.bank_revision = revision
 
     st.caption(f"題庫：{len(flashcards)} 個單元，共 {sum(map(len, flashcards.values()))} 張卡")
-    mode = st.radio("練習方式", ["分單元練習", "全部混合練習", "歷史錯題複習"], horizontal=True)
+    with st.expander("🚆 上車前下載：離線複習與四小時建議"):
+        st.write("建議先練 15–19 單元的 FBW 與自駕架構，再做 20、23、25 的冗餘與穩定模型，接著 26–30 的 INS／GPS，最後用 22 計算題及錯題收尾。可依熟悉程度調整，不必一次做完。")
+        for filename, label, mime in [
+            ("offline_review.html", "下載離線互動版（HTML）", "text/html"),
+            ("review_guide.txt", "下載完整題目與答案（TXT）", "text/plain"),
+        ]:
+            path = APP_DIR / filename
+            if path.exists():
+                st.download_button(label, path.read_bytes(), file_name=filename, mime=mime)
+        st.caption("離線互動版請在可執行 JavaScript 的瀏覽器開啟；若手機檔案預覽器不支援，改看純文字題本。離線進度與 Streamlit 不同步。")
+    mode = st.radio("練習方式", ["分單元練習", "全部混合練習", "歷史錯題複習", "作業與申論混合"], horizontal=True)
     if mode == "分單元練習":
         selected_unit = st.selectbox("📂 練習單元", list(flashcards),
                                      format_func=lambda u: f"{u}（{len(flashcards[u])} 張）")
@@ -205,6 +217,13 @@ def main():
     elif mode == "全部混合練習":
         cards = [(unit, term, meaning) for unit, terms in flashcards.items() for term, meaning in terms.items()]
         quiz_key = mode
+    elif mode == "作業與申論混合":
+        cards = [(unit, term, meaning) for unit, terms in flashcards.items()
+                 for term, meaning in terms.items() if term.startswith("HW-")]
+        quiz_key = mode
+        if not cards:
+            st.info("題庫尚未加入作業與申論題。")
+            return
     else:
         try:
             cards = load_wrong_cards(flashcards)
